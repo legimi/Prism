@@ -4,17 +4,15 @@
   <Target Name="CopyNuGetReadme"
           BeforeTargets="_GetPackageFiles"
           Condition=" $(IsPackable) == 'true' ">
-    <Exec Command="echo # $(PackageId) > $(IntermediateOutputPath)\readme.txt"
-          ConsoleToMsBuild="true" />
+    <Exec Command="echo # $(PackageId) > $(IntermediateOutputPath)readme.txt" />
 
-    <Exec Command="type $(MSBuildThisFileDirectory)ReadMe.md >> $(IntermediateOutputPath)\readme.txt"
-          ConsoleToMsBuild="true" />
+    <Exec Command="cat $(MSBuildThisFileDirectory)ReadMe.md >> $(IntermediateOutputPath)readme.txt" />
   </Target>
 
   <Target Name="PackNuGetReadMe"
           AfterTargets="CopyNuGetReadme">
     <ItemGroup>
-      <_PackageFiles Include="$(IntermediateOutputPath)\readme.txt" PackagePath="" />
+      <_PackageFiles Include="$(IntermediateOutputPath)readme.txt" PackagePath="" />
     </ItemGroup>
   </Target>
 
